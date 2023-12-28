@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import Multiselect from '@vueform/multiselect'
-import { Channels } from '@imagemagick/magick-wasm';
-import { ref } from 'vue';
+import Multiselect from "@vueform/multiselect";
+import { Channels } from "@imagemagick/magick-wasm";
+import { ref } from "vue";
 
 const props = defineProps<{
-    modelValue: Channels
+    modelValue: Channels;
 }>();
 
 const emit = defineEmits<{
-    (e: 'update:modelValue', channels: Channels): void
-}>()
+    (e: "update:modelValue", channels: Channels): void;
+}>();
 
 interface ChannelOption {
     value: Channels;
@@ -17,16 +17,16 @@ interface ChannelOption {
     disabled: boolean;
 }
 
-const channels = ref<Channels[]>([props.modelValue])
+const channels = ref<Channels[]>([props.modelValue]);
 const options: ChannelOption[] = [
-    { value: Channels.Undefined, label: 'Undefined', disabled: false },
-    { value: Channels.Composite, label: 'Composite', disabled: true },
-    { value: Channels.Red, label: 'Red', disabled: true },
-    { value: Channels.Green, label: 'Green', disabled: true },
-    { value: Channels.Blue, label: 'Blue', disabled: true },
-    { value: Channels.Black, label: 'Black', disabled: true },
-    { value: Channels.Alpha, label: 'Alpha', disabled: true },
-]
+    { value: Channels.Undefined, label: "Undefined", disabled: false },
+    { value: Channels.Composite, label: "Composite", disabled: true },
+    { value: Channels.Red, label: "Red", disabled: true },
+    { value: Channels.Green, label: "Green", disabled: true },
+    { value: Channels.Blue, label: "Blue", disabled: true },
+    { value: Channels.Black, label: "Black", disabled: true },
+    { value: Channels.Alpha, label: "Alpha", disabled: true },
+];
 
 const valueChanged = (value: Channels[]): void => {
     if (value.length == 0) {
@@ -39,8 +39,8 @@ const valueChanged = (value: Channels[]): void => {
     for (let i = 0; i < value.length; i++) {
         channels |= value[i];
     }
-    emit('update:modelValue', channels)
-}
+    emit("update:modelValue", channels);
+};
 
 const optionSelected = (_value: Channels[], option: ChannelOption): void => {
     if (option.value == Channels.Undefined) {
@@ -56,11 +56,17 @@ const optionSelected = (_value: Channels[], option: ChannelOption): void => {
         options[0].disabled = true;
         options[1].disabled = true;
     }
-}
+};
 </script>
 
 <template>
-    <Multiselect mode="tags" v-model="channels" :options="options" @change="valueChanged" @select="optionSelected">
+    <Multiselect
+        mode="tags"
+        v-model="channels"
+        :options="options"
+        @change="valueChanged"
+        @select="optionSelected"
+    >
     </Multiselect>
 </template>
 

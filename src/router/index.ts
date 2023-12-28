@@ -19,7 +19,8 @@ const router = createRouter({
                 { path: 'blur', component: () => import('@/views/classes/MagickImage/BlurView.vue') },
                 { path: 'charcoal', component: () => import('@/views/classes/MagickImage/CharcoalView.vue') },
                 { path: 'liquidRescale', component: () => import('@/views/classes/MagickImage/LiquidRescaleView.vue') },
-                { path: 'rotate', component: () => import('@/views/classes/MagickImage/RotateView.vue') }
+                { path: 'rotate', component: () => import('@/views/classes/MagickImage/RotateView.vue') },
+                { path: 'crop-advanced', component: () => import('@/views/classes/MagickImage/CropView.vue') }
             ]
         },
         { path: '/:pathMatch(.*)*', component: () => import('@/views/NotFoundView.vue') }
