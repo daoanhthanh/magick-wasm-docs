@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@imagemagick/magick-wasm": "0.0.26",
+    "@mdi/font": "^7.4.47",
     "@vueform/multiselect": "^2.6.6",
     "simple-syntax-highlighter": "3.0.2",
     "vue": "3.3.11",

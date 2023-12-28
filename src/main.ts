@@ -1,5 +1,5 @@
-import { createApp } from "vue";
-import { initializeImageMagick, Magick } from "@imagemagick/magick-wasm";
+import {createApp} from "vue";
+import {initializeImageMagick, Magick} from "@imagemagick/magick-wasm";
 import App from "./App.vue";
 import router from "./router";
 import "vue-material/dist/vue-material.min.css";
@@ -17,7 +17,8 @@ initializeImageMagick(wasmLocation).then(() => {
         response.arrayBuffer().then((buffer) => {
             const font = new Uint8Array(buffer);
             Magick.addFont("Hack", font);
-            createApp(App).use(router).mount("#app");
+            createApp(App).use(router)
+                .mount("#app");
         });
     });
 });

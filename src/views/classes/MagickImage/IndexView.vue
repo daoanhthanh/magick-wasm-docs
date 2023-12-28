@@ -1,28 +1,14 @@
 <script setup lang="ts">
 import ImageCanvas from "@/components/ImageCanvas.vue";
-import { ImageMagick, type IMagickImage } from "@imagemagick/magick-wasm";
-import { ref } from "vue";
+import {ImageMagick, type IMagickImage} from "@imagemagick/magick-wasm";
+import {ref} from "vue";
+import {useRouter} from "vue-router";
 
 const canvas = ref<typeof ImageCanvas>();
 
-const routes = [
-    {
-        url: "/classes/magick-image/blur",
-        operator: "Blur",
-    },
-    {
-        url: "/classes/magick-image/charcoal",
-        operator: "Charcoal",
-    },
-    {
-        url: "/classes/magick-image/liquidRescale",
-        operator: "Liquid Rescale",
-    },
-    {
-        url: "/classes/magick-image/rotate",
-        operator: "Rotate",
-    },
-];
+const router = useRouter();
+
+const currentPath = ref<string>(router.currentRoute.value.path);
 
 const load = (image: string): void => {
     ImageMagick.read(image, (image) => canvas.value?.write(image));
@@ -47,6 +33,12 @@ const showExample = (func: (image: IMagickImage) => void) => {
         canvas.value?.write(image);
     });
 };
+
+const changeRoute = (event: Event) => {
+    const target = event.target as HTMLSelectElement;
+    const path = target.value;
+    router.push(path);
+};
 </script>
 
 <template>
@@ -54,19 +46,17 @@ const showExample = (func: (image: IMagickImage) => void) => {
 
     <div class="container">
         <div>
-            <RouterLink to="/classes/magick-image/blur">blur</RouterLink> |
-            <RouterLink to="/classes/magick-image/charcoal"
-                >charcoal</RouterLink
-            >
-            |
-            <RouterLink to="/classes/magick-image/liquidRescale"
-                >liquidRescale</RouterLink
-            >
-            |
-            <RouterLink to="/classes/magick-image/rotate">rotate</RouterLink> |
-            <RouterLink to="/classes/magick-image/crop-advanced"
-                >Crop</RouterLink
-            >
+
+            <label for="operators">Choose operator:&nbsp</label>
+
+            <select name="operators" v-on:change="changeRoute" v-model="currentPath">
+                <option selected disabled>&ltnone&gt</option>
+                <option value="/classes/magick-image/blur">Blur</option>
+                <option value="/classes/magick-image/charcoal">Charcoal</option>
+                <option value="/classes/magick-image/liquidRescale">Liquid Rescale</option>
+                <option value="/classes/magick-image/rotate">Rotate</option>
+                <option value="/classes/magick-image/crop-advanced">Crop</option>
+            </select>
             <RouterView @showExample="showExample" />
         </div>
         <div>

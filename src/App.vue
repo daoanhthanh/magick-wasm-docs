@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
+
 </script>
 
 <template>
@@ -19,7 +20,7 @@ import { RouterLink, RouterView } from "vue-router";
                 </div>
                 <div class="menu-item">
                     <router-link to="/classes/magick-image"
-                        >MagickImage</router-link
+                        >Playground</router-link
                     >
                 </div>
                 <Services title="Services" />
