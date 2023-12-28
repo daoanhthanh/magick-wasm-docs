@@ -14,6 +14,9 @@ const router = createRouter({
         },
         {
             path: '/classes/magick-image',
+            redirect() {
+                return { path: '/classes/magick-image/blur' }
+            },
             component: () => import('@/views/classes/MagickImage/IndexView.vue'),
             children: [
                 { path: 'blur', component: () => import('@/views/classes/MagickImage/BlurView.vue') },

@@ -39,6 +39,30 @@ const changeRoute = (event: Event) => {
     const path = target.value;
     router.push(path);
 };
+
+const routes = [
+    {
+        path: "/classes/magick-image/blur",
+        name: "Blur",
+    },
+    {
+        path: "/classes/magick-image/charcoal",
+        name: "Charcoal",
+    },
+    {
+        path: "/classes/magick-image/liquidRescale",
+        name: "Liquid Rescale",
+    },
+    {
+        path: "/classes/magick-image/rotate",
+        name: "Rotate",
+    },
+    {
+        path: "/classes/magick-image/crop-advanced",
+        name: "Crop",
+    }
+];
+
 </script>
 
 <template>
@@ -50,12 +74,9 @@ const changeRoute = (event: Event) => {
             <label for="operators">Choose operator:&nbsp</label>
 
             <select name="operators" v-on:change="changeRoute" v-model="currentPath">
-                <option selected disabled>&ltnone&gt</option>
-                <option value="/classes/magick-image/blur">Blur</option>
-                <option value="/classes/magick-image/charcoal">Charcoal</option>
-                <option value="/classes/magick-image/liquidRescale">Liquid Rescale</option>
-                <option value="/classes/magick-image/rotate">Rotate</option>
-                <option value="/classes/magick-image/crop-advanced">Crop</option>
+                <option v-for="route in routes" :key="route.path" :value="route.path">
+                    {{ route.name }}
+                </option>
             </select>
             <RouterView @showExample="showExample" />
         </div>
