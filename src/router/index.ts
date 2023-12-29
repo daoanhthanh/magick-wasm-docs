@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,7 +23,8 @@ const router = createRouter({
                 { path: 'charcoal', component: () => import('@/views/classes/MagickImage/CharcoalView.vue') },
                 { path: 'liquidRescale', component: () => import('@/views/classes/MagickImage/LiquidRescaleView.vue') },
                 { path: 'rotate', component: () => import('@/views/classes/MagickImage/RotateView.vue') },
-                { path: 'crop-advanced', component: () => import('@/views/classes/MagickImage/CropView.vue') }
+                { path: 'crop-advanced', component: () => import('@/views/classes/MagickImage/CropView.vue') },
+                { path: 'composite', component: () => import('@/views/classes/MagickImage/CombineImage.vue') }
             ]
         },
         { path: '/:pathMatch(.*)*', component: () => import('@/views/NotFoundView.vue') }

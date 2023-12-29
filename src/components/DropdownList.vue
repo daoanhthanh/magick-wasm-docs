@@ -23,22 +23,7 @@
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
 
-const menuRoutes = [
-    {
-        name: "Web",
-        path: "/services/web",
-    },
-    {
-        name: "Design",
-        path: "/services/design",
-    },
-    {
-        name: "Videos",
-        path: "/services/videos",
-    },
-];
-
-const props = defineProps({
+defineProps({
     title: String,
 });
 

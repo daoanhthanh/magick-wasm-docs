@@ -2,7 +2,7 @@ import {createApp} from "vue";
 import {initializeImageMagick, Magick} from "@imagemagick/magick-wasm";
 import App from "./App.vue";
 import router from "./router";
-import "vue-material/dist/vue-material.min.css";
+// import "vue-material/dist/vue-material.min.css";
 
 const wasmLocation = new URL(
     "@imagemagick/magick-wasm/magick.wasm",

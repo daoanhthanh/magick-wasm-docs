@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import ImageCanvas from "@/components/ImageCanvas.vue";
-import {ImageMagick, type IMagickImage} from "@imagemagick/magick-wasm";
-import {ref} from "vue";
-import {useRouter} from "vue-router";
+import { ImageMagick, type IMagickImage } from "@imagemagick/magick-wasm";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 const canvas = ref<typeof ImageCanvas>();
 
@@ -15,7 +15,15 @@ const load = (image: string): void => {
 };
 
 async function loadDefault(): Promise<void> {
-    const filePath = "/default_load.jpeg";
+    const currentPath = router.currentRoute.value.path;
+    let filePath = "";
+
+    if (currentPath === "/classes/magick-image/composite") {
+        filePath = "/combine_template.jpeg";
+    } else {
+        filePath = "/default_load.jpeg";
+    }
+
     const file = await fetch(filePath);
 
     const fileBuffer = await file.arrayBuffer();
@@ -60,9 +68,12 @@ const routes = [
     {
         path: "/classes/magick-image/crop-advanced",
         name: "Crop",
-    }
+    },
+    {
+        path: "/classes/magick-image/composite",
+        name: "Multiple Crop And Composite",
+    },
 ];
-
 </script>
 
 <template>
@@ -70,11 +81,18 @@ const routes = [
 
     <div class="container">
         <div>
+            <label for="operators">Choose operator:&nbsp;</label>
 
-            <label for="operators">Choose operator:&nbsp</label>
-
-            <select name="operators" v-on:change="changeRoute" v-model="currentPath">
-                <option v-for="route in routes" :key="route.path" :value="route.path">
+            <select
+                name="operators"
+                v-on:change="changeRoute"
+                v-model="currentPath"
+            >
+                <option
+                    v-for="route in routes"
+                    :key="route.path"
+                    :value="route.path"
+                >
                     {{ route.name }}
                 </option>
             </select>
@@ -84,7 +102,9 @@ const routes = [
             <div class="buttons">
                 <button v-on:click="load('logo:')">Load logo</button>
                 <button v-on:click="load('wizard:')">Load wizard</button>
-                <button v-on:click="loadDefault()">Load Custom Image</button>
+                <button id="load-custom-img" v-on:click="loadDefault()">
+                    Load Custom Image
+                </button>
             </div>
             <ImageCanvas ref="canvas" />
         </div>
@@ -99,9 +119,15 @@ const routes = [
 .container div {
     padding: 0 1em 0 1em;
     flex: 0 1 50%;
+    max-width: 50vw;
 }
 
 .container .buttons {
     padding: 1em 0 1em 0;
+}
+
+.container canvas {
+    max-width: 100%;
+    object-fit: contain;
 }
 </style>
