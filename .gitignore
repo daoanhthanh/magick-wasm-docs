@@ -25,3 +25,4 @@ pnpm-debug.log*
 .metals/
 bun.lockb
 .vite
+package-lock.json
