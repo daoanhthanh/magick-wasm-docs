@@ -1,6 +1,20 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 
+const menuRoutes = [
+    {
+        path: "/",
+        name: "Home",
+    },
+    {
+        path: "/classes/magick",
+        name: "Magick",
+    },
+    {
+        path: "/classes/magick-image",
+        name: "Playground",
+    },
+];
 </script>
 
 <template>
@@ -12,17 +26,22 @@ import { RouterLink, RouterView } from "vue-router";
                     target="_blank"
                     ><img alt="Github logo" src="./assets/github.svg"
                 /></a>
-                <div class="menu-item">
-                    <router-link to="/">Home</router-link>
-                </div>
-                <div class="menu-item">
-                    <router-link to="/classes/magick">Magick</router-link>
-                </div>
-                <div class="menu-item">
-                    <router-link to="/classes/magick-image"
-                        >Playground</router-link
+
+                <router-link
+                    v-for="route in menuRoutes"
+                    :key="route.name"
+                    :to="route.path"
+                    custom
+                    v-slot="{ navigate, isActive }"
+                >
+                    <div
+                        class="menu-item"
+                        :class="{ active: isActive }"
+                        @click="navigate"
                     >
-                </div>
+                        {{ route.name }}
+                    </div>
+                </router-link>
                 <Services title="Services" />
             </nav>
         </div>
