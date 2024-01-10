@@ -3,6 +3,7 @@ import ImageCanvas from "@/components/ImageCanvas.vue";
 import { ImageMagick, type IMagickImage } from "@imagemagick/magick-wasm";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import CropDetailSelection from "@/components/CropDetailSelection.vue";
 
 const canvas = ref<typeof ImageCanvas>();
 
@@ -19,9 +20,9 @@ async function loadDefault(): Promise<void> {
     let filePath = "";
 
     if (currentPath === "/classes/magick-image/composite") {
-        filePath = "/combine_template.jpeg";
+        filePath = "/images/combine_template.jpeg";
     } else {
-        filePath = "/default_load.jpeg";
+        filePath = "/images/default_load.jpeg";
     }
 
     const file = await fetch(filePath);
@@ -96,9 +97,15 @@ const routes = [
                     {{ route.name }}
                 </option>
             </select>
-            <RouterView @showExample="showExample" />
+
+            <crop-detail-selection
+                crop-super-path="/classes/magick-image/crop-advanced"
+                v-if="currentPath === '/classes/magick-image/crop-advanced'"
+            />
+
+            <router-view @show-example="showExample" />
         </div>
-        <div>
+        <div id="result">
             <div class="buttons">
                 <button v-on:click="load('logo:')">Load logo</button>
                 <button v-on:click="load('wizard:')">Load wizard</button>

@@ -7,9 +7,8 @@ const props = defineProps<{
     modelValue: Channels;
 }>();
 
-const emit = defineEmits<{
-    (e: "update:modelValue", channels: Channels): void;
-}>();
+const emit =
+    defineEmits<(e: "update:modelValue", channels: Channels) => void>();
 
 interface ChannelOption {
     value: Channels;
@@ -30,14 +29,14 @@ const options: ChannelOption[] = [
 
 const valueChanged = (value: Channels[]): void => {
     if (value.length == 0) {
-        for (let i = 0; i < options.length; i++) {
-            options[i].disabled = false;
+        for (const element of options) {
+            element.disabled = false;
         }
     }
 
     let channels = Channels.Undefined;
-    for (let i = 0; i < value.length; i++) {
-        channels |= value[i];
+    for (const element of value) {
+        channels |= element;
     }
     emit("update:modelValue", channels);
 };

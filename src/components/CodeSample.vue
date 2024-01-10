@@ -13,7 +13,7 @@ defineProps<{
 
 <style>
 .ssh-pre__content {
-    font-family: "Hack", "monospace";
+    font-family: "Hack", monospace;
     font-size: 9pt;
 }
 </style>

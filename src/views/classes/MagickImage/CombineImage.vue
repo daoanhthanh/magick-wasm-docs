@@ -1,13 +1,11 @@
 <template>
-    <br />
-    <br />
-    <br />
+    <br /><br /><br />
     <button v-on:click="showExample">Execute</button>
 </template>
 
 <script setup lang="ts">
-import type { IMagickImage } from "@imagemagick/magick-wasm";
 import $ from "jquery";
+import { ImageMagick, type IMagickImage } from "@imagemagick/magick-wasm";
 
 import {
     AlphaOption,
@@ -27,16 +25,38 @@ const y_cor = ref<number>(0);
 const resizedWidth = ref<number>(300);
 const resizedHeight = ref<number>(300);
 
+const imageSettings = [
+    {
+        
+    }
+];
+
 const emit =
     defineEmits<
         (e: "showExample", func: (image: IMagickImage) => void) => void
     >();
 
 function showExample(): void {
-    emit("showExample", circularCrop);
+    emit("showExample", combineImages);
 }
 
-function circularCrop(image: IMagickImage): void {
+async function fetchImages(): Promise<IMagickImage[]> {
+    const images = Array.from(
+        { length: 6 },
+        (_, i) => `/images/img${i + 1}.jpeg`
+    );
+
+    const promises = images.map((image) =>
+        fetch(image)
+            .then((res) => res.arrayBuffer())
+            .then((buffer) => new Uint8Array(buffer))
+            .then((byteArray) => ImageMagick.read(byteArray, (i) => i))
+    );
+
+    return Promise.all(promises);
+}
+
+function combineImages(image: IMagickImage): void {
     image.crop(
         new MagickGeometry(
             x_cor.value,
