@@ -12,12 +12,12 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@imagemagick/magick-wasm": "0.0.26",
+    "@imagemagick/magick-wasm": "0.0.27",
     "@mdi/font": "^7.4.47",
     "@vueform/multiselect": "^2.6.6",
     "jquery": "^3.7.1",
     "simple-syntax-highlighter": "3.0.2",
-    "vue": "3.3.11",
+    "vue": "3.4.0",
     "vue-router": "4.2.5"
   },
   "devDependencies": {
