@@ -92,7 +92,7 @@ const routes = [
                 <option
                     v-for="route in routes"
                     :key="route.path"
-                    :value="route.path"
+                    :value="route.path.split('/').slice(0, 4).join('/')"
                 >
                     {{ route.name }}
                 </option>

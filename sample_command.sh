@@ -55,3 +55,45 @@ convert template.png \
   -geometry +1039+82 -compose DstOver -composite \
   \( template.png -resize 3102x1260! \) \
   -compose DstOver -composite 1704770193853finish.png
+
+
+"data/images/order/360238-20240105-0837432006/1704856506357/bc96da5f-2ddc-4d51-b936-faf612c9fd77.jpeg",
+  "-background",
+  "transparent",
+  "+repage",
+  "-crop",
+  "2848x2848+0+0!",
+  "-flatten",
+  "-define",
+  "modulate:colorspace=HSB",
+  "-auto-orient",
+  "-alpha",
+  "on",
+  "(",
+  "+clone",
+  "-channel",
+  "a",
+  "-evaluate",
+  "multiply",
+  "0",
+  "+channel",
+  "-fill",
+  "white",
+  "-draw",
+  "translate 1424, 1424 rotate 47 rectangle -992, -1013, 992, 1013 ",
+  ")",
+  "-compose",
+  "DstIn",
+  "-composite",
+  "-resize",
+  "815x815!",
+  "data/images/order/360238-20240105-0837432006/1704856506357/crop_bc96da5f-2ddc-4d51-b936-faf612c9fd77.png"
+
+magick leaf.jpeg \
+  -background transparent \
+  +repage -crop 1678x1678+516+564! \
+  -flatten -define modulate:colorspace=HSB \
+  -auto-orient -alpha on \
+  \( +clone -channel a -evaluate multiply 0 +channel -fill white -draw 'translate 839, 839 rectangle -839, -839, 839, 839 ' \) \
+  -compose DstIn -composite -resize 526x526! \
+  leaf.png

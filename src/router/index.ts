@@ -49,7 +49,14 @@ const router = createRouter({
                             path: "circle",
                             component: () =>
                                 import(
-                                    "@/views/classes/MagickImage/crop/CropView.vue"
+                                    "@/views/classes/MagickImage/crop/CropCircleView.vue"
+                                ),
+                        },
+                        {
+                            path: "rectangle",
+                            component: () =>
+                                import(
+                                    "@/views/classes/MagickImage/crop/CropRectangleView.vue"
                                 ),
                         },
                     ],

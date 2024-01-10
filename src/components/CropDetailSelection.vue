@@ -5,8 +5,8 @@
         <select name="operators" v-on:change="navigate" v-model="supOperator">
             <option
                 v-for="cropOption in cropOptions"
-                :key="cropOption.path"
-                :value="cropOption.path"
+                :key="cropOption.name"
+                :value="cropOption.name"
             >
                 {{ cropOption.name }}
             </option>
@@ -43,12 +43,9 @@ const prop = defineProps({
 
 const navigate = (event: Event) => {
     const target = event.target as HTMLSelectElement;
-    const path = prop.cropSuperPath + target.value;
+    const path = prop.cropSuperPath + "/" + target.value.toLocaleLowerCase();
     router.push(path);
 };
 
-const supOperator = ref<string | undefined>(
-    router.currentRoute.value.path.split("/").pop()
-);
+const supOperator = ref<string>("Circle");
 </script>
-
